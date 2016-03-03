@@ -1,0 +1,9 @@
+{
+  "preset": "airbnb",
+  "esnext": true,
+  "safeContextKeyword": ["self"],
+  "disallowMultipleVarDecl": false,
+  "requireUseStrict": false,
+  "maximumLineLength": 80,
+  "maxErrors": 20
+}
