@@ -1,6 +1,6 @@
 {
   "name": "pageload",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Get page load time by CasperJS/PhantomJS",
   "main": "app/?",
   "scripts": {
