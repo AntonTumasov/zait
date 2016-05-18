@@ -4,7 +4,7 @@ const ymljs = undefined,
 /**
  * @namespace JSON parser namespace
  */
-exports.jsonParser = {
+exports.json = {
   /**
    * Parse a command to API kind
    * 
@@ -13,20 +13,30 @@ exports.jsonParser = {
    *                   object will make by default way)
    */
   parseCommand: function (cmd) {
-    let parsedCmd = {};
+    let parsedCmd = {},
+        methodName;
+    
+    parsedCmd.opts = {};
 
     if (typeOf(cmd) === 'string') {
       parsedCmd.url = cmd;
-      parsedCmd.method = 'GET';
+      parsedCmd.opts.method = 'GET';
 
       return parsedCmd;
     }
+    
+    methodName = Object.keys(cmd)[0];
 
-    parsedCmd.url = Object.keys(cmd)[0];
+    parsedCmd.opts.method = methodName;
+    parsedCmd.url = cmd[methodName].url;
+    
+    delete(cmd[methodName].url);
 
-    for (let opt in cmd) {
-      parsedCmd[opt] = cmd[opt];
+    for (let opt in cmd[methodName]) {
+      parsedCmd.opts[opt] = cmd[methodName][opt];
     }
+    
+    console.log(parsedCmd);
 
     return parsedCmd;
   },
@@ -44,4 +54,4 @@ exports.jsonParser = {
   }
 };
 
-exports.ymlParser = {};
+exports.yml = {};
