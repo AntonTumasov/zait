@@ -14,8 +14,8 @@ exports.json = {
    */
   parseCommand: function (cmd) {
     let parsedCmd = {},
-        methodName;
-    
+      methodName;
+
     parsedCmd.opts = {};
 
     if (typeOf(cmd) === 'string') {
@@ -24,19 +24,17 @@ exports.json = {
 
       return parsedCmd;
     }
-    
+
     methodName = Object.keys(cmd)[0];
 
     parsedCmd.opts.method = methodName;
     parsedCmd.url = cmd[methodName].url;
-    
+
     delete(cmd[methodName].url);
 
     for (let opt in cmd[methodName]) {
       parsedCmd.opts[opt] = cmd[methodName][opt];
     }
-    
-    console.log(parsedCmd);
 
     return parsedCmd;
   },
