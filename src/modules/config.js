@@ -17,7 +17,7 @@ exports.config = {
   get commands() {
     return this.get.commands;
   },
-  get messaging() {
-
+  get reporter() {
+    return this.get.reporter;
   }
 };
