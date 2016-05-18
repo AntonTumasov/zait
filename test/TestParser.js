@@ -1,3 +1,4 @@
+//@TODO run it through mocha-casperjs
 const parser = require('../src/modules/parser.js'),
   assert = require('chai').assert;
 
