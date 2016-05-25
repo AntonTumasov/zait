@@ -1,0 +1,11 @@
+{
+    "commands": [
+        {"GET": {
+        "url": "http://google.com"
+    }},{"GET": {
+        "url": "http://mail.ru"
+    }},{"GET": {
+        "url": "http://yandex.ru"
+    }}
+    ]
+}

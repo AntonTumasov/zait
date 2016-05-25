@@ -15,7 +15,7 @@ describe('Configuration handler', function () {
   before(function () {
     cliArgumentsStorage = {
         parser: undefined,
-        file: './build/test/pageload.json' 
+    file: './test/files/pageload.json' 
     };
 
     casper.cli.get = sinon.stub();

@@ -1,29 +1,19 @@
 const casper = require('casper').Casper({
     verbose: true,
     logLevel: 'debug'
-  }),
-  config = require('modules/config.js').config;
-
-casper.on('error', function (err) {
+  });casper.on('error', function (err) {
   this.log(err, 'error');
   this.exit(1);
 });
 
-casper.start('http://google.com');
-casper.run();
+const  config = require('modules/config.js').config(casper),
+  commands = config.parsedCommands;
 
-/*
-{
-  method: 'GET',
-  headers: {
+casper.start().eachThen(commands, function (res) {
+  const command = res.data;
   
-  },
-  data: {
-  
-  },
-  url: ''
-}
-*/
+  this.open(command.url, command.opts);
+}).run();
 
 //TODO make eachThen instead of this
 /*testedPagesUrl.forEach(function (urlEl, urlIndex) {
