@@ -65,7 +65,7 @@ gulp.task('prepare-casper-test', function () {
 
 gulp.task('casper-test', ['prepare-casper-test'],function () {
   return gulp.src('./build/test/*.js', {read: false})
-    .pipe(shell(['${process.cwd()}/node_modules/mocha-casperjs/bin/mocha-casperjs ./build/test/*.js', 'rm -rf ./build/test']))
+    .pipe(shell(['./node_modules/mocha-casperjs/bin/mocha-casperjs ./build/test/*.js', 'rm -rf ./build/test']))
 });
 
 gulp.task('js', ['lint', 'jscpd', 'jscs'], function () {

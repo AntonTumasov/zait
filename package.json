@@ -41,6 +41,7 @@
     "gulp-mocha": "^2.2.0",
     "gulp-shell": "^0.5.2",
     "jshint": "^2.9.2",
-    "jshint-stylish": "^2.1.0"
+    "jshint-stylish": "^2.1.0",
+    "mocha-casperjs": "^0.5.7"
   }
 }
