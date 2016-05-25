@@ -8,7 +8,7 @@ const fs = require('fs'),
  */
 exports.config = function (casper) {
   return {
-    _confParser: (function () {
+    _confParser: (function () { //@TODO make parser auto detect(by file extension)
       const confParser = casper.cli.get('parser') || 'json';
 
       return confParser
@@ -19,7 +19,7 @@ exports.config = function (casper) {
     get raw() {
       if (!this._file) {
         let configPath = casper.cli.get('file') || 'pageload.json' ||
-          'pageload.yml',
+        'pageload.yml',
           conf = fs.read(configPath.trim());
 
         this._file = conf; //narrow place(memory)
@@ -29,7 +29,7 @@ exports.config = function (casper) {
         return this._file;
       }
     },
-    get parsed() {
+    get parsedConfig() {
       switch (this._confParser) {
       case 'json':
         return JSON.parse(this.raw);
@@ -39,11 +39,11 @@ exports.config = function (casper) {
         throw new Error('There is no parser for this file.'); //@TODO make custom errors
       }
     },
-    get commands() {
-      return this.parsed.commands;
+    get parsedCommands() {
+      return parser.json.parseCommands(this.parsedConfig.commands);
     },
     get reporter() {
-      return this.parsed.reporter;
+      return this.parsedConfig;
     }
   }
 };
