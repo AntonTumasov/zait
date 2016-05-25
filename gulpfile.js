@@ -8,6 +8,7 @@ const gulp = require('gulp'),
   jscpd = require('gulp-jscpd'),
   jscs = require('gulp-jscs'),
   jsdoc = require('gulp-jsdoc3'),
+  shell = require('gulp-shell'),
   //config
   paths = {
       from: ['src/**/*.js', 'app/*.js'],
@@ -37,7 +38,7 @@ gulp.task('jscs', function () {
 gulp.task('jsdoc', function () {
   const jsDocConf = require('./jsdocConf.json');
   
-return gulp.src(paths.from, {base: '.', read: false})
+  return gulp.src(paths.from, {base: '.', read: false})
     .pipe(jsdoc());
 });
 
@@ -54,6 +55,19 @@ gulp.task('test', ['before-test'],function () {
     .pipe(istanbul.enforceThresholds({ thresholds: { global: 60 }}));
 });
 
+gulp.task('prepare-casper-test', function () {
+  return gulp.src('./test/casperjs/*.js')
+    .pipe(babel({
+      presets: ['es2015']
+    }))
+    .pipe(gulp.dest('./build/test'))
+});
+
+gulp.task('casper-test', ['prepare-casper-test'],function () {
+  return gulp.src('./build/test/*.js', {read: false})
+    .pipe(shell(['./node_modules/mocha-casperjs/bin/mocha-casperjs ./build/test/*.js', 'rm -rf ./build/test']))
+});
+
 gulp.task('js', ['lint', 'jscpd', 'jscs'], function () {
   return gulp.src(paths.from, {base: '.'})
     .pipe(babel({
@@ -62,7 +76,7 @@ gulp.task('js', ['lint', 'jscpd', 'jscs'], function () {
     .pipe(gulp.dest(paths.to));
 });
 
-gulp.task('build', ['test', 'js', 'jsdoc']);
+gulp.task('build', ['test', 'js', 'casper-test','jsdoc']);
 
 gulp.task('default', ['js']);
 
