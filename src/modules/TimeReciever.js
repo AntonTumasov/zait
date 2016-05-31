@@ -1,14 +1,17 @@
 /**
- * Load time class
- * 
+ * Time reciever class
+ *
  * @constructor
+ *
+ * @param Object Casper implementation
+ *
  */
-function LoadTimeReciever(casper) {
+function TimeReciever(casper) {
   this.casper = casper;
-  
+
   /**
    * Set page loading time
-   * 
+   *
    * @param {String} url Url of page
    * @param {Object} metricsObjRef Reference for metrics object where metrics
    * will be setted
@@ -21,18 +24,20 @@ function LoadTimeReciever(casper) {
     casper = this.casper;
 
     /**
-     * Request handler to set start time of page loading 
-     * 
+     * Request handler to set start time of page loading
+     *
      * @inner
      */
     function requestHandler(resource) {
       startTime = new Date().getTime();
+
+      casper.removeListener('page.resource.requested', requestHandler);
     }
 
     /**
      * Receive handler to set end time of page loading
      * and clearing.
-     * 
+     *
      * @inner
      */
     function receiveHandler() {
@@ -40,7 +45,6 @@ function LoadTimeReciever(casper) {
 
       metricsObjRef.loadTime = endTime - startTime;
 
-      casper.removeListener('page.resource.requested', requestHandler);
       casper.removeListener('page.resource.received', receiveHandler);
     }
 
@@ -59,3 +63,4 @@ function LoadTimeReciever(casper) {
 }
 
 exports.LoadTimeReciever = LoadTimeReciever;
+
