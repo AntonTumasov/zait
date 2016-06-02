@@ -6,7 +6,7 @@
  * @param Object Casper implementation
  *
  */
-function TimeReciever(casper) {
+function TimeReceiver(casper) {
   this.casper = casper;
 
   /**
@@ -18,8 +18,7 @@ function TimeReciever(casper) {
    */
   this.setPageLoadingTime = function (metricsObjRef, url) {
     let startTime,
-      endTime,
-      pageName;
+      endTime;
 
     casper = this.casper;
 
@@ -29,9 +28,9 @@ function TimeReciever(casper) {
      * @inner
      */
     function requestHandler(resource) {
-      startTime = new Date().getTime();
+        startTime = new Date().getTime();
 
-      casper.removeListener('page.resource.requested', requestHandler);
+        casper.removeListener('page.resource.requested', requestHandler);
     }
 
     /**
@@ -41,11 +40,11 @@ function TimeReciever(casper) {
      * @inner
      */
     function receiveHandler() {
-      endTime = new Date().getTime();
+        endTime = new Date().getTime();
 
-      metricsObjRef.loadTime = endTime - startTime;
+        metricsObjRef.loadTime = endTime - startTime;
 
-      casper.removeListener('page.resource.received', receiveHandler);
+        casper.removeListener('page.resource.received', receiveHandler);
     }
 
     return casper.then(function () {
@@ -54,13 +53,9 @@ function TimeReciever(casper) {
        */
       casper.on('page.resource.requested', requestHandler);
       casper.on('page.resource.received', receiveHandler);
-
-      if (url) {
-        casper.open(url);
-      }
     });
   };
 }
 
-exports.LoadTimeReciever = LoadTimeReciever;
+exports.TimeReceiver = TimeReceiver;
 
