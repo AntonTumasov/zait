@@ -15,14 +15,16 @@ const commands = config.parsedCommands;
 const TimeReceiver = require('./modules/TimeReceiver.js').TimeReceiver;
 const timeReceiver = new TimeReceiver(casper);
 
-let metrics = {};
+let metrics = [];
 
 casper.start().eachThen(commands, function (res) {
   const command = res.data;
 
-  metrics[command.url] = {};
+  let curMetricIndex = metrics.push({
+    url: command.url
+  });
 
-  timeReceiver.setPageLoadingTime(metrics[command.url], command.url);
+  timeReceiver.setPageLoadingTime(metrics[curMetricIndex], command.url);
 
   this.open(command.url, command.opts);
 }).run();
