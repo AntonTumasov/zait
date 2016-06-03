@@ -1,5 +1,5 @@
 const casper = require('casper').Casper({
-  verbose: true,
+  verbose: false,
   logLevel: 'debug'
 });
 

@@ -4,7 +4,7 @@ const parser = require('./parser.js');
 /**
  * @namespace Configuration handling
  *
- * * @param {Object} casper CasperJS instance
+ * @param {Object} casper CasperJS instance
  */
 exports.config = function (casper) {
   return {
