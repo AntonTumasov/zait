@@ -1,4 +1,5 @@
 /**
+ *
  * Time receiver class
  *
  * @constructor
@@ -17,8 +18,8 @@ function TimeReceiver(casper) {
    * will be set
    */
   this.setPageLoadingTime = function (metricsObjRef, url) {
-    let startTime,
-      endTime;
+    let startTime;
+    let endTime;
 
     casper = this.casper;
 
@@ -28,9 +29,9 @@ function TimeReceiver(casper) {
      * @inner
      */
     function requestHandler(resource) {
-        startTime = new Date().getTime();
+      startTime = new Date().getTime();
 
-        casper.removeListener('page.resource.requested', requestHandler);
+      casper.removeListener('page.resource.requested', requestHandler);
     }
 
     /**
@@ -40,20 +41,18 @@ function TimeReceiver(casper) {
      * @inner
      */
     function receiveHandler() {
-        endTime = new Date().getTime();
+      endTime = new Date().getTime();
 
-        metricsObjRef.loadTime = endTime - startTime;
+      metricsObjRef.loadTime = endTime - startTime;
 
-        casper.removeListener('page.resource.received', receiveHandler);
+      casper.removeListener('page.resource.received', receiveHandler);
     }
 
-    return casper.then(function () {
-      /**
-       * @todo Add jsdoc for events events
-       */
-      casper.on('page.resource.requested', requestHandler);
-      casper.on('page.resource.received', receiveHandler);
-    });
+    /**
+     * @todo Add jsdoc for events events
+     */
+    casper.on('page.resource.requested', requestHandler);
+    casper.on('page.resource.received', receiveHandler);
   };
 }
 

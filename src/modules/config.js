@@ -1,10 +1,10 @@
-const fs = require('fs'),
-  parser = require('./parser.js');
+const fs = require('fs');
+const parser = require('./parser.js');
 
 /**
  * @namespace Configuration handling
- * 
- * @param {Object} casper CasperJS instance
+ *
+ * * @param {Object} casper CasperJS instance
  */
 exports.config = function (casper) {
   return {
@@ -15,12 +15,14 @@ exports.config = function (casper) {
         .toLowerCase()
         .trim();
     })(),
+
     _file: undefined,
+
     get raw() {
       if (!this._file) {
         let configPath = casper.cli.get('file') || 'pageload.json' ||
-        'pageload.yml',
-          conf = fs.read(configPath.trim());
+        'pageload.yml';
+        let conf = fs.read(configPath.trim());
 
         this._file = conf; //narrow place(memory)
 
@@ -29,6 +31,7 @@ exports.config = function (casper) {
         return this._file;
       }
     },
+
     get parsedConfig() {
       switch (this._confParser) {
       case 'json':
@@ -39,11 +42,14 @@ exports.config = function (casper) {
         throw new Error('There is no parser for this file.'); //@TODO make custom errors
       }
     },
+
     get parsedCommands() {
       return parser.json.parseCommands(this.parsedConfig.commands);
     },
+
     get reporter() {
       return this.parsedConfig;
     }
-  }
+  };
+
 };
