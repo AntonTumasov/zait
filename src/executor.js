@@ -21,10 +21,13 @@ casper.start().eachThen(commands, function (res) {
   const command = res.data;
 
   let curMetricIndex = metrics.push({
-    url: command.url
-  });
+    url: command.url,
+    metrics: {}
+  }) - 1;
 
-  timeReceiver.setPageLoadingTime(metrics[curMetricIndex], command.url);
+  console.log(metrics[curMetricIndex]);
+
+  timeReceiver.setPageLoadingTime(metrics[curMetricIndex].metrics, command.url);
 
   this.open(command.url, command.opts);
 }).run();
