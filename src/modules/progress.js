@@ -1,10 +1,13 @@
+/**@module progress*/
+
+const casper = window.casper;
+
 /**
- * @namespace Progress bar and info module
+ * Init progress module
  *
- * @param {Object} casper Casper instance
  * @param {Number} commandsNum Number of commands
  */
-exports.progress = function (casper, commandsNum) {
+exports.progress = function (commandsNum) {
   casper.on('resource.requested', function () {
 
   });

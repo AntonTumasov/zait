@@ -1,10 +1,7 @@
-const ymljs = undefined;
 const typeOf = require('typeof');
 
-/**
- * @namespace JSON parser namespace
- */
-exports.json = {
+/**@module parser*/
+module.exports = {
   /**
    * Parse a command to API kind
    *

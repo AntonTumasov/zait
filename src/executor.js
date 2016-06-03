@@ -1,5 +1,5 @@
-const casper = require('casper').Casper({
-  verbose: false,
+const casper = window.casper = require('casper').Casper({
+  verbose: true,
   logLevel: 'debug'
 });
 
@@ -10,12 +10,14 @@ casper.on('error', function (err) {
 
 //===========================================
 
-const config = require('modules/config.js').config(casper);
+const config = require('modules/config');
 const commands = config.parsedCommands;
-const TimeReceiver = require('./modules/TimeReceiver.js').TimeReceiver;
+const TimeReceiver = require('./modules/TimeReceiver').TimeReceiver;
 const timeReceiver = new TimeReceiver(casper);
 
 let metrics = [];
+
+console.log(JSON.stringify(config));
 
 casper.start().eachThen(commands, function (res) {
   const command = res.data;
