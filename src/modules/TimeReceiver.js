@@ -1,9 +1,9 @@
 /**
- * Time reciever class
+ * Time receiver class
  *
  * @constructor
  *
- * @param Object Casper implementation
+ * @param {Object} casper Casper instance
  *
  */
 function TimeReceiver(casper) {
@@ -14,7 +14,7 @@ function TimeReceiver(casper) {
    *
    * @param {String} url Url of page
    * @param {Object} metricsObjRef Reference for metrics object where metrics
-   * will be setted
+   * will be set
    */
   this.setPageLoadingTime = function (metricsObjRef, url) {
     let startTime,
@@ -49,7 +49,7 @@ function TimeReceiver(casper) {
 
     return casper.then(function () {
       /**
-       * @todo Добавить комментарии для event'ов
+       * @todo Add jsdoc for events events
        */
       casper.on('page.resource.requested', requestHandler);
       casper.on('page.resource.received', receiveHandler);

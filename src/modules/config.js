@@ -4,7 +4,7 @@ const fs = require('fs'),
 /**
  * @namespace Configuration handling
  * 
- * @param {Object} CasperJS instance
+ * @param {Object} casper CasperJS instance
  */
 exports.config = function (casper) {
   return {

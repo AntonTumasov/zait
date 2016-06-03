@@ -29,7 +29,7 @@ influentClient
       .write(influxData);
   })
   .then(function () {
-    casper.log('Metrics was sended', 'info');
+    casper.log('Metrics was sent', 'info');
   })
   .catch(function (e) {
     casper.log(e, 'error');
