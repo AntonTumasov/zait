@@ -8,11 +8,4 @@ const casper = window.casper;
  * @param {Number} commandsNum Number of commands
  */
 exports.progress = function (commandsNum) {
-  casper.on('resource.requested', function () {
-
-  });
-
-  casper.on('resource.recieved', function () {
-
-  });
 };
