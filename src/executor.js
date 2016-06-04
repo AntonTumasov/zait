@@ -10,14 +10,12 @@ casper.on('error', function (err) {
 
 //===========================================
 
-const config = require('modules/config');
+const config = require('modules/parser');
 const commands = config.parsedCommands;
 const TimeReceiver = require('./modules/TimeReceiver').TimeReceiver;
 const timeReceiver = new TimeReceiver(casper);
 
 let metrics = [];
-
-console.log(JSON.stringify(config));
 
 casper.start().eachThen(commands, function (res) {
   const command = res.data;

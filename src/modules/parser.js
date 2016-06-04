@@ -1,51 +1,64 @@
-const typeOf = require('typeof');
+const casper = window.casper;
+const fs = require('fs');
+const commandBuilder = require('./commandBuilder');
+const ymljs = undefined;
+
+const confParser = (function () { //@TODO make parser auto detect(by file extension)
+  const confParser = casper.cli.get('parser') || 'json';
+
+  return confParser
+    .toLowerCase()
+    .trim();
+})();
 
 /**@module parser*/
 module.exports = {
   /**
-   * Parse a command to API kind
+   * Get rawConfig configuration file
    *
-   * @param   {Object|String} cmd Command to parse
-   * @returns {Object} Parsed command (if not parsed command was string
-   *                   object will make by default way)
+   * @type {String}
    */
-  parseCommand: function (cmd) {
-    let parsedCmd = {};
-    let methodName;
+  get rawConfig() {
+    let configPath = casper.cli.get('file') || 'pageload.json' ||
+      'pageload.yml';
+    let conf = fs.read(configPath.trim());
 
-    parsedCmd.opts = {};
-
-    if (typeOf(cmd) === 'string') {
-      parsedCmd.url = cmd;
-      parsedCmd.opts.method = 'GET';
-
-      return parsedCmd;
-    }
-
-    methodName = Object.keys(cmd)[0];
-
-    parsedCmd.opts.method = methodName;
-    parsedCmd.url = cmd[methodName].url;
-
-    delete(cmd[methodName].url);
-
-    for (let opt in cmd[methodName]) {
-      /* istanbul ignore else */
-      if (cmd[methodName].hasOwnProperty(opt)) {
-        parsedCmd.opts[opt] = cmd[methodName][opt];
-      }
-    }
-
-    return parsedCmd;
+    return conf;
   },
+
   /**
-   * Parse a commands to API kind
+   * Get parsed config file
    *
-   * @param   {Array} commands Commands to parse
-   * @returns {Array} Array of parsed commands (if not parsed command was string
-   *                   object will make by default way)
+   * @throws {Error} Throw error if there is no commandBuilder for a file.
+   * @type {JSON}
    */
-  parseCommands: function (commands) {
-    return commands.map(this.parseCommand);
+  get parsedConfig() {
+    switch (confParser) {
+      case 'json':
+        return JSON.parse(this.rawConfig);
+      case 'yml':
+        return null;
+      default:
+        throw new Error('There is no commandBuilder for this file.'); //@TODO make custom errors
+    }
+  },
+
+  /**
+   * Get parsed commands
+   *
+   * @type {Array}
+   */
+  get parsedCommands() {
+    return commandBuilder.buildCommands(this.parsedConfig.commands);
+  },
+
+  /**
+   * Get reporter
+   *
+   * @type {Object}
+   */
+  get report() {
+    return this.parsedConfig;
   }
 };
+

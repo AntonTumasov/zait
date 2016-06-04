@@ -3,7 +3,7 @@ casper.on('error', function (err) {
   this.exit(1);
 });
 
-const config = require('../src/modules/config'),
+const config = require('../src/modules/parser'),
   assert = require('chai').assert,
   sinon = require('sinon');
 
@@ -20,7 +20,7 @@ describe('Configuration handler', function () {
     casper.cli.get = sinon.stub();
 
     casper.cli.get
-      .withArgs('parser')
+      .withArgs('commandBuilder')
       .returns(cliArgumentsStorage.parser)
       .withArgs('file')
       .returns(cliArgumentsStorage.file);
@@ -29,9 +29,9 @@ describe('Configuration handler', function () {
   });
 
   //@TODO add dynamic file creation and moving
-  describe('Get raw file', function () {
-    it('should return raw file', function () {
-      const confFile = config.raw;
+  describe('Get rawConfig file', function () {
+    it('should return rawConfig file', function () {
+      const confFile = config.rawConfig;
 
       assert.isString(confFile);
     });
