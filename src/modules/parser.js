@@ -3,24 +3,22 @@ const fs = require('fs');
 const commandBuilder = require('./commandBuilder');
 const ymljs = undefined;
 
-const confParser = (function () { //@TODO make parser auto detect(by file extension)
-  const confParser = casper.cli.get('parser') || 'json';
-
-  return confParser
-    .toLowerCase()
-    .trim();
-})();
-
 /**@module parser*/
 module.exports = {
+  get confParser() { //@TODO make parser auto detect(by file extension)
+    const confParser = casper.cli.get('parser') || 'json';
+
+    return confParser
+      .toLowerCase()
+      .trim();
+  },
   /**
    * Get rawConfig configuration file
    *
    * @type {String}
    */
   get rawConfig() {
-    let configPath = casper.cli.get('file') || 'pageload.json' ||
-      'pageload.yml';
+    let configPath = casper.cli.get('file') || `pageload.${this.confParser}`;
     let conf = fs.read(configPath.trim());
 
     return conf;
@@ -33,13 +31,13 @@ module.exports = {
    * @type {JSON}
    */
   get parsedConfig() {
-    switch (confParser) {
+    switch (this.confParser) {
       case 'json':
         return JSON.parse(this.rawConfig);
       case 'yml':
         return null;
       default:
-        throw new Error('There is no commandBuilder for this file.'); //@TODO make custom errors
+        throw new Error('There is no parser for this file.'); //@TODO make custom errors
     }
   },
 
