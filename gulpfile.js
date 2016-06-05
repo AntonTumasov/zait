@@ -59,9 +59,7 @@ gulp.task('test', ['before-test'], function () {
 
 gulp.task('prepare-casper-test', function () {
   return gulp.src('./test/casperjs/*.js')
-    .pipe(babel({
-      presets: ['es2015']
-    }))
+    .pipe(babel())
     .pipe(gulp.dest('./build/test'))
 });
 
