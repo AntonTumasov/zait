@@ -1,5 +1,3 @@
-/**@module TimeReceiver*/
-
 /**
  *
  * Time receiver class
@@ -9,7 +7,7 @@
  * @param {Object} casper Casper instance
  *
  */
-export default function TimeReceiver(casper) {
+function TimeReceiver(casper) {
   this.casper = casper;
 
   /**
@@ -58,3 +56,4 @@ export default function TimeReceiver(casper) {
   };
 }
 
+export default TimeReceiver;

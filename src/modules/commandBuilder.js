@@ -1,7 +1,8 @@
-/**@module commandBuilder*/
+/**@module modules/commandBuilder*/
 
 import typeOf from 'typeof';
 
+/**@namespace*/
 const commandBuilder = {
   /**
    * Parse a command to API kind

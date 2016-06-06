@@ -1,11 +1,9 @@
-/**@module Repoters/Reporter*/
-
 /**
- * Reporter root class(interface)
+ * Reporter interface
  */
-export default class Reporter {
+class Reporter {
   /**
-   * Initialize metrics
+   * Initialize reporter
    *
    * @param {Object} metrics
    * @param {Object} options
@@ -21,6 +19,7 @@ export default class Reporter {
 
   /**
    * Report metrics method
+   * @abstract
    */
   report() {
     throw Error('Field is not implemented');
@@ -41,5 +40,6 @@ export default class Reporter {
         return this._reportFailMsg;
     }
   }
-
 }
+
+export default Reporter;

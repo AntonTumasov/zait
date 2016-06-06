@@ -1,5 +1,5 @@
 import {Casper} from 'casper';
-import Parser from 'modules/parser';
+import Parser from 'modules/Parser';
 import TimeReceiver from './modules/TimeReceiver';
 import fs from 'fs';
 

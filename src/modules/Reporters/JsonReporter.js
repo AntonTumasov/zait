@@ -1,9 +1,17 @@
-/**@module Reporters/JsonReporter*/
-
 import Reporter from './Reporter';
 import fs from 'fs';
 
-export default class JsonReporter extends Reporter {
+/**
+ * JSON reporter class
+ *
+ */
+class JsonReporter extends Reporter {
+  /**
+   * Initialize reporter
+   *
+   * @param {Object} metrics Metrics
+   * @param {Object|Undefined} options Reporter options
+   */
   constructor(metrics, options) {
     super(metrics, options);
 
@@ -28,5 +36,6 @@ export default class JsonReporter extends Reporter {
       this._reportFailMsg = e.message;
     }
   }
-
 }
+
+export default JsonReporter;

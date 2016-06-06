@@ -1,10 +1,17 @@
-/**@module parser*/
-
 import commandBuilder from './commandBuilder';
 import yaml from "js-yaml";
 
-export default class Parser {
+/**
+ * Parser class
+ */
+class Parser {
 
+  /**
+   * Set parser config and parser type
+   *
+   * @param {String} confParser Parser type
+   * @param {String} config Raw Zait configuration
+   */
   constructor(confParser, config) {
     this.confParser = confParser;
     this.config = config;
@@ -46,3 +53,4 @@ export default class Parser {
   }
 }
 
+export default Parser;
