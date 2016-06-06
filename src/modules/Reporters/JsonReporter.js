@@ -1,20 +1,32 @@
 /**@module Reporters/JsonReporter*/
 
-const Reporter = require('./Reporter');
+import Reporter from './Reporter';
+import fs from 'fs';
 
-function JsonReporter() {
+export default class JSONReporter extends Reporter {
+  constructor(metrics, options) {
+    super(metrics, options);
+
+    this._reportSuccessMsg = '';// Add msg
+    this._reportFailMsg = ''; // Add msg
+  }
+
   /**
-   * Report builder
-   *
-   * @param metrics {Object} Received metrics
+   * Write json report to file
    */
-  this.buildReport = function (metrics) {
-    return metrics;
-  };
+  report() {
 
-  this._reportType = 'json';
+    const jsonReport = JSON.stringify(this._metrics);
+
+    try {
+      fs.write('./zait_report.json', jsonReport, 'w');
+
+      this.reportStatus = true;
+    } catch (e) {
+      this.reportStatus = false;
+
+      this._reportFailMsg = e.message;
+    }
+  }
+
 }
-
-JsonReporter.prototype = Object.create(Reporter.prototype);
-
-module.exports = JsonReporter;
