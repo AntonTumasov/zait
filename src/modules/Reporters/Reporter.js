@@ -1,8 +1,9 @@
 /**@module Repoters/Reporter*/
 
-/**Reporter root class(interface)*/
+/**
+ * Reporter root class(interface)
+ */
 export default class Reporter {
-
   /**
    * Initialize metrics
    *
@@ -10,8 +11,12 @@ export default class Reporter {
    * @param {Object} options
    */
   constructor(metrics, options) {
-    this.metrics = metrics;
-    this.options = options;
+    this.reportStatus = undefined;
+
+    this._metrics = metrics;
+    this._options = options;
+    this._reportSuccessMsg = undefined;
+    this._reportFailMsg = undefined;
   }
 
   /**
@@ -27,7 +32,14 @@ export default class Reporter {
    * @returns {String}
    */
   get reportLog() {
-    return this.metrics;
+    switch (this.reportLog) {
+      case undefined:
+        return 'Report status wasn\'t changed. Can not figure out report status.';
+      case false:
+        return this._reportSuccessMsg;
+      case true:
+        return this._reportFailMsg;
+    }
   }
 
 }
