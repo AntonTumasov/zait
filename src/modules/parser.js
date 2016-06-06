@@ -1,30 +1,15 @@
 /**@module parser*/
 
 import commandBuilder from './commandBuilder';
-import fs from 'fs';
 
-const casper = window.casper;
 const ymljs = undefined;
 
-const parser = {
-  get confParser() { //@TODO make parser auto detect(by file extension)
-    const confParser = casper.cli.get('parser') || 'json';
+export default class Parser {
 
-    return confParser
-      .toLowerCase()
-      .trim();
-  },
-  /**
-   * Get rawConfig configuration file
-   *
-   * @type {String}
-   */
-  get rawConfig() {
-    let configPath = casper.cli.get('file') || `pageload.${this.confParser}`;
-    let conf = fs.read(configPath.trim());
-
-    return conf;
-  },
+  constructor(confParser, config) {
+    this.confParser = confParser;
+    this.config = config;
+  }
 
   /**
    * Get parsed config file
@@ -35,13 +20,13 @@ const parser = {
   get parsedConfig() {
     switch (this.confParser) {
       case 'json':
-        return JSON.parse(this.rawConfig);
+        return JSON.parse(this.config);
       case 'yml':
         return null;
       default:
         throw new Error('There is no parser for this file.'); //@TODO make custom errors
     }
-  },
+  }
 
   /**
    * Get parsed commands
@@ -50,7 +35,7 @@ const parser = {
    */
   get parsedCommands() {
     return commandBuilder.buildCommands(this.parsedConfig.commands);
-  },
+  }
 
   /**
    * Get reporter
@@ -60,6 +45,5 @@ const parser = {
   get report() {
     return this.parsedConfig;
   }
-};
+}
 
-export default parser;
