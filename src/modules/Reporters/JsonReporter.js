@@ -3,7 +3,7 @@
 import Reporter from './Reporter';
 import fs from 'fs';
 
-export default class JSONReporter extends Reporter {
+export default class JsonReporter extends Reporter {
   constructor(metrics, options) {
     super(metrics, options);
 
