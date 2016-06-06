@@ -1,8 +1,7 @@
 /**@module parser*/
 
 import commandBuilder from './commandBuilder';
-
-const ymljs = undefined;
+import yaml from "js-yaml";
 
 export default class Parser {
 
@@ -22,7 +21,7 @@ export default class Parser {
       case 'json':
         return JSON.parse(this.config);
       case 'yml':
-        return null;
+        return yaml.load(this.config);
       default:
         throw new Error('There is no parser for this file.'); //@TODO make custom errors
     }
