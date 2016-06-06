@@ -6,10 +6,12 @@ export default class Reporter {
   /**
    * Initialize metrics
    *
-   * @param metrics
+   * @param {Object} metrics
+   * @param {Object} options
    */
-  constructor(metrics) {
+  constructor(metrics, options) {
     this.metrics = metrics;
+    this.options = options;
   }
 
   /**
