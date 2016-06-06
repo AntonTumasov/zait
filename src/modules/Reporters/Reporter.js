@@ -22,7 +22,7 @@ export default class Reporter {
   /**
    * Report metrics method
    */
-  static report() {
+  report() {
     throw Error('Field is not implemented');
   }
 
