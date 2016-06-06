@@ -1,12 +1,11 @@
 import Parser from '../src/modules/parser';
 import {assert} from 'chai';
 
-
 describe('Configuration handler', function () {
 
   let configJson;
   let configYml;
-  
+
   before(function () {
     configJson = `{
       "commands": [
@@ -44,15 +43,15 @@ describe('Configuration handler', function () {
 
     it('should return object when parser is json', function () {
       const parser = new Parser('json', configJson);
-      
+
       assert.isObject(parser.parsedConfig);
     });
-    
-    it('should return object when parser is yml', function() {
+
+    it('should return object when parser is yml', function () {
       const parser = new Parser('yml', configYml);
-      
+
       assert.isObject(parser.parsedConfig);
-    })
+    });
 
     it('should throws error when parser does not exist', function () {
       const parser = new Parser('nonexistenparser', configJson);
@@ -60,8 +59,8 @@ describe('Configuration handler', function () {
       let getterThrowsErr = false;
 
       try {
-        parser.parsedConfig
-      } catch(e) {
+        parser.parsedConfig;
+      } catch (e) {
         getterThrowsErr = true;
       }
 
@@ -76,7 +75,7 @@ describe('Configuration handler', function () {
   describe('Get parsed commands', function () {
     it('should returns array of commands', function () {
       const parser = new Parser('json', configJson);
-      
+
       assert.isArray(parser.parsedCommands);
     });
   });
