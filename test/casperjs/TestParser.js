@@ -1,11 +1,11 @@
+import parser from '../src/modules/parser';
+import {assert} from 'chai';
+import sinon from 'sinon';
+
 casper.on('error', function (err) {
   this.log(err, 'error');
   this.exit(1);
 });
-
-const parser = require('../src/modules/parser');
-const assert = require('chai').assert;
-const sinon = require('sinon');
 
 describe('Configuration handler', function () {
 

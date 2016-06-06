@@ -1,4 +1,6 @@
-const casper = window.casper = require('casper').Casper({
+import {Casper} from 'casper';
+
+const casper = window.casper = Casper({
   verbose: true,
   logLevel: 'debug'
 });
@@ -7,12 +9,12 @@ casper.on('error', function (err) {
   this.log(err, 'error');
   this.exit(1);
 });
-
 //===========================================
 
-const config = require('modules/parser');
+import config from 'modules/parser';
+import TimeReceiver from './modules/TimeReceiver';
+
 const commands = config.parsedCommands;
-const TimeReceiver = require('./modules/TimeReceiver').TimeReceiver;
 const timeReceiver = new TimeReceiver(casper);
 
 let metrics = [];

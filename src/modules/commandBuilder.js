@@ -1,7 +1,8 @@
-const typeOf = require('typeof');
-
 /**@module commandBuilder*/
-module.exports = {
+
+import typeOf from 'typeof';
+
+const commandBuilder = {
   /**
    * Parse a command to API kind
    *
@@ -49,3 +50,5 @@ module.exports = {
     return commands.map(this.buildCommand);
   }
 };
+
+export default commandBuilder;

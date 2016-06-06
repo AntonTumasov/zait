@@ -1,10 +1,12 @@
+/**@module parser*/
+
+import commandBuilder from './commandBuilder';
+import fs from 'fs';
+
 const casper = window.casper;
-const fs = require('fs');
-const commandBuilder = require('./commandBuilder');
 const ymljs = undefined;
 
-/**@module parser*/
-module.exports = {
+const parser = {
   get confParser() { //@TODO make parser auto detect(by file extension)
     const confParser = casper.cli.get('parser') || 'json';
 
@@ -60,3 +62,4 @@ module.exports = {
   }
 };
 
+export default parser;
