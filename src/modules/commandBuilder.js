@@ -1,4 +1,4 @@
-/**@module modules/commandBuilder*/
+/**@module commandBuilder*/
 
 import typeOf from 'typeof';
 
