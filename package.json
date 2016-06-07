@@ -1,8 +1,8 @@
 {
-  "name": "pageload",
+  "name": "zait",
   "version": "0.2.0",
   "description": "Get page load time by CasperJS/PhantomJS",
-  "main": "app/?",
+  "main": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -24,6 +24,7 @@
   "dependencies": {
     "casperjs": "^1.1.1",
     "js-yaml": "^3.6.1",
+    "markdown-table": "^0.4.0",
     "phantomjs-prebuilt": "^2.1.7",
     "sinon": "^1.17.4",
     "typeof": "^1.0.0"
