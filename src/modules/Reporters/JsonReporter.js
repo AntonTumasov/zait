@@ -1,9 +1,11 @@
+/**@module Reporters*/
+
 import Reporter from './Reporter';
 import fs from 'fs';
 
 /**
  * JSON reporter class
- *
+ * @extends Reporter
  */
 class JsonReporter extends Reporter {
   /**
@@ -11,8 +13,13 @@ class JsonReporter extends Reporter {
    *
    * @param {Object} metrics Metrics
    * @param {Object|Undefined} options Reporter options
+   * @param {String} env Get environment for testing TODO: DI required instead of
    */
-  constructor(metrics, options) {
+  constructor(metrics, options, env) {
+    if (env === 'test') {
+      fs.read = fs.readFileSync;
+    }
+
     super(metrics, options);
 
     this._reportSuccessMsg = '';// Add msg
