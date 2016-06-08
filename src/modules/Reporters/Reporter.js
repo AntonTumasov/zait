@@ -15,8 +15,8 @@ class Reporter {
 
     this._metrics = metrics;
     this._options = options;
-    this._reportSuccessMsg = undefined;
-    this._reportFailMsg = undefined;
+    this._reportSuccessMsg = 'Success';
+    this._reportFailMsg = 'Fail';
   }
 
   /**
@@ -33,9 +33,9 @@ class Reporter {
    * @returns {String}
    */
   get reportLog() {
-    switch (this.reportLog) {
+    switch (this.reportStatus) {
       case undefined:
-        return 'Report status wasn\'t changed. Can not figure out report status.';
+        return 'Report status wasn\'t changed or it wasn\'t run. Can not figure out report status.';
       case false:
         return this._reportSuccessMsg;
       case true:
