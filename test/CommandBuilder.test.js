@@ -1,9 +1,7 @@
 import commandBuilder from '../src/modules/commandBuilder';
 import {assert} from 'chai';
 
-//@TODO run it through mocha-casperjs
-
-describe('JSON commandBuilder', function () {  
+describe('JSON commandBuilder', function () {
   describe('buildCommand', function () {
     it('should return object when string argument pass', function () {
       const url = 'http://example.com',
