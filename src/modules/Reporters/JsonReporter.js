@@ -17,11 +17,12 @@ class JsonReporter extends Reporter {
    */
   constructor(metrics, options, env) {
     if (env === 'test') {
-      fs.read = fs.readFileSync;
+      fs.write = fs.writeFileSync;
     }
 
     super(metrics, options);
 
+    this._options = options;
     this._reportSuccessMsg = '';// Add msg
     this._reportFailMsg = ''; // Add msg
   }
@@ -34,11 +35,11 @@ class JsonReporter extends Reporter {
     const jsonReport = JSON.stringify(this._metrics);
 
     try {
-      fs.write('./zait_report.json', jsonReport, 'w');
+      fs.write(this._options.report_path, jsonReport);
 
-      this.reportStatus = true;
-    } catch (e) {
       this.reportStatus = false;
+    } catch (e) {
+      this.reportStatus = true;
 
       this._reportFailMsg = e.message;
     }
