@@ -5,4 +5,4 @@ before_script:
 script:
     - gulp build
 after_success:
-    - npm scripts coveralls
+    - npm run coveralls
