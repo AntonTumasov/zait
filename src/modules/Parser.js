@@ -1,5 +1,5 @@
 import commandBuilder from './commandBuilder';
-import yaml from "js-yaml";
+import yaml from 'js-yaml';
 
 /**
  * Parser class
