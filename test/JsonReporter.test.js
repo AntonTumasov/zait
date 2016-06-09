@@ -18,7 +18,6 @@ describe('JSON reporter', function () {
 
     beforeEach(function () {
       try {
-        fs.statSync(options.report_path).isFile();
         fs.unlinkSync(options.report_path);
       } catch (e) {}
     });
@@ -38,10 +37,7 @@ describe('JSON reporter', function () {
 
       const jsonReporter = new JsonReporter(metrics, options, 'test');
 
-      jsonReporter.report();
-
       assert.throws(jsonReporter.report);
-
     });
 
     it('report status should be false(zero code)', function () {
