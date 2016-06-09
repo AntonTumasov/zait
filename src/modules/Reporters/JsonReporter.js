@@ -32,7 +32,7 @@ class JsonReporter extends Reporter {
    */
   report() {
 
-    const jsonReport = JSON.stringify(this._metrics);
+    const jsonReport = JSON.stringify(this._metrics, null, 4);
 
     try {
       fs.write(this._options.report_path, jsonReport);
