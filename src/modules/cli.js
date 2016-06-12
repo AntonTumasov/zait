@@ -3,42 +3,34 @@
  */
 import chalk from 'chalk';
 
-
-class Message {
+/**@namespace*/
+const Message = {
 
   /**
    * Print standard message to console
    *
    * @param {String} msg Message for print
    */
-  print(msg){
+  print: function (msg) {
     console.log(msg);
-  };
+  },
 
   /**
    * Print error message to console
    *
    * @param {String} msg Message for print
    */
-  error(msg){
-    console.log(chalk.red.(msg));
-  };
-
-  /**
-   * Print success message to console
-   *
-   * @param {String} msg Message for print
-   */
-  success(msg){
-    console.log(chalk.green(msg));
-  };
+  err: function (msg) {
+    console.log(chalk.red(msg));
+  },
 
   /**
    * Print warning message to console
    *
    * @param {String} msg Message for print
    */
-  warn(msg){
+  warn: function (msg) {
     console.log(chalk.yellow(msg));
-  };
-}
+  }
+
+};
