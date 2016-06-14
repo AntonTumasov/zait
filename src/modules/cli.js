@@ -1,14 +1,15 @@
 import chalk from 'chalk';
+import mdTable from 'markdown-table';
 
 /**@namespace*/
-const message = {
+export const message = {
 
   /**
    * Print standard message to console
    *
    * @param {String} msg Message for printing
    */
-  print: function (msg) {
+  print(msg) {
     console.log(msg);
   },
 
@@ -17,7 +18,7 @@ const message = {
    *
    * @param {String} msg Message for printing
    */
-  err: function (msg) {
+  err(msg) {
     console.error(chalk.red(msg));
   },
 
@@ -26,9 +27,27 @@ const message = {
    *
    * @param {String} msg Message for printing
    */
-  warn: function (msg) {
+  warn(msg) {
     console.warn(chalk.yellow(msg));
+  },
+
+  /**
+   * Print success message to console
+   *
+   * @param {String} msg Message for printing
+   */
+  success(msg) {
+    this.print(chalk.green(msg));
+  },
+
+  /**
+   * Print markdown table to console
+   *
+   * @param {Array} table Table array
+   * @param {Object} config Table configuration
+   */
+  table(table, config = { align: 'c' }) {
+    this.print(mdTable(table, config));
   }
 };
 
-export default message;
