@@ -1,6 +1,8 @@
 import {Casper} from 'casper';
 import Parser from 'modules/Parser';
 import TimeReceiver from './modules/TimeReceiver';
+import utils from './modules/utils';
+import {message} from './modules/cli';
 import fs from 'fs';
 
 const casper = Casper({
@@ -12,6 +14,9 @@ casper.on('error', function (err) {
   this.log(err, 'error');
   this.exit(1);
 });
+
+casper.cli.drop('casper-path');
+casper.cli.drop('cli');
 
 //========================================
 
