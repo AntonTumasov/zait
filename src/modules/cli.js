@@ -1,15 +1,12 @@
-/**
- * Created by sergey on 09.06.16.
- */
 import chalk from 'chalk';
 
 /**@namespace*/
-const Message = {
+const message = {
 
   /**
    * Print standard message to console
    *
-   * @param {String} msg Message for print
+   * @param {String} msg Message for printing
    */
   print: function (msg) {
     console.log(msg);
@@ -18,19 +15,20 @@ const Message = {
   /**
    * Print error message to console
    *
-   * @param {String} msg Message for print
+   * @param {String} msg Message for printing
    */
   err: function (msg) {
-    console.log(chalk.red(msg));
+    console.error(chalk.red(msg));
   },
 
   /**
    * Print warning message to console
    *
-   * @param {String} msg Message for print
+   * @param {String} msg Message for printing
    */
   warn: function (msg) {
-    console.log(chalk.yellow(msg));
+    console.warn(chalk.yellow(msg));
   }
-
 };
+
+export default message;
