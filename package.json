@@ -1,6 +1,6 @@
 {
   "name": "zait",
-  "version": "0.2.x-dev",
+  "version": "0.2.0-DEV",
   "description": "Get page load time by CasperJS/PhantomJS",
   "main": "",
   "scripts": {
