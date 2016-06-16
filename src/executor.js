@@ -15,19 +15,11 @@ casper.on('error', function (err) {
   this.exit(1);
 });
 
-casper.cli.drop('casper-path');
-casper.cli.drop('cli');
-
 //========================================
 
-let confParser = casper.cli.get('parser') || 'json';
-confParser = confParser.toLowerCase().trim();
-
-let configPath = casper.cli.get('file') || `pageload.${confParser}`;
-let conf = fs.read(configPath.trim());
-
-const parser = new Parser(confParser, conf);
-
+const args = JSON.parse(casper.cli.get(0)); //JSON object of args passed by Python
+const conf = fs.read(args.configPath);
+const parser = new Parser(args.confParser, conf);
 const commands = parser.parsedCommands;
 const timeReceiver = new TimeReceiver(casper);
 
@@ -37,11 +29,10 @@ casper.start().eachThen(commands, function (res) {
   const command = res.data;
 
   let curMetricIndex = metrics.push({
-    url: command.url,
-    metrics: {}
+    url: command.url
   }) - 1;
 
-  timeReceiver.setPageLoadingTime(metrics[curMetricIndex].metrics, command.url);
+  timeReceiver.setPageLoadingTime(metrics[curMetricIndex], command.url);
 
   this.open(command.url, command.opts);
 }).run();
