@@ -1,4 +1,4 @@
-import chalk from 'chalk';
+import chalk from 'phantomjs-chalk';
 import mdTable from 'markdown-table';
 
 /**@namespace*/
