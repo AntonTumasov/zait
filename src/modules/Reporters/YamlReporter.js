@@ -16,14 +16,20 @@ class YamlReporter extends Reporter {
    * @param {Object|Undefined} options Reporter options
    * @param {String} env Get environment for testing
    */
-  constructor(metrics, options, env) {
+  constructor(metrics, options = {}, env = 'prod') {
     if (env === 'test') {
       fs.write = fs.writeFileSync;
     }
 
     super(metrics, options);
 
-    this._options = options;
+    const defaultOptions = {
+      report_path: './zait.report.yml'
+    };
+
+    //this._options = Object.assign(defaultOptions, options);
+    this._options = {};
+    this._options.report_path = './zait.report.yml'
     this._reportSuccessMsg = '';
     this._reportFailMsg = '';
   }
@@ -37,7 +43,7 @@ class YamlReporter extends Reporter {
     try {
       fs.write(this._options.report_path, yamlReport);
 
-      this._reportSuccessMsg = 'Success! YAML report was wrote in ./.';
+      this._reportSuccessMsg = `Success! YAML report was wrote in ${this._options.report_path}`;
       this.reportStatus = false;
     } catch (e) {
       this.reportStatus = true;
